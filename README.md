@@ -11,8 +11,8 @@
 - **Presentation Canva:**[View Presentation](https://www.canva.com/design/DAGU5w4aH58/cyM9JlFrBUv5uoaPf97xLA/view?utm_content=DAGU5w4aH58&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 - **Github Backlog:**[View Backlog](https://github.com/users/Ibrahim-Nidam/projects/2/views/1)
 - **Figma Brief:** [View on Figma](https://www.figma.com/design/xI4d5SGFc3jm6Pm9XfaepO/TaskFlow---Kanban?node-id=0-1&t=BLGX0W6wYI047Tjh-1)
-- **GitHub Repository:** [View on GitHub](https://github.com/Ibrahim-Nidam/Ibrahim_Nidam_ToDo.git)
-- **Hosted Page:** [View Live](https://ibrahim-nidam.github.io/Ibrahim_Nidam_ToDo/)
+- **GitHub Repository:** [View on GitHub](https://github.com/Youcode-Classe-E-2024-2025/Ibrahim_Nidam_ToDo.git)
+- **Hosted Page:** [View Live](https://youcode-classe-e-2024-2025.github.io/Ibrahim_Nidam_ToDo/)
 - **Color Palette:** [View Color Palette](https://coolors.co/ffffff-274c77-6096ba-000000)
 
 ### **Level :** Niveau 1

@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --completion-bar: linear-gradient(to right, #6096BA 37%, #6096BA 37%, rgba(128, 128, 128, 0.29) 37%);
+}
+
+.text-black {
+  filter: brightness(0) saturate(100%);
+}
+
+
+main {
+    margin-left: -1px; /* Adjust as necessary */
+}
+
+.completetion-bar{
+    background: var(--completion-bar);
+}
+
+#kanban{
+
+    background-color:rgba(217, 217, 217,0.19);
+}

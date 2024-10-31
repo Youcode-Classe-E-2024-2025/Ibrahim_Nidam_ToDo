@@ -205,7 +205,7 @@
           </div>
           <img id="more-vert-todo" data-para-id="todo-para" src="assets/src/images/icons/more vert points.svg" alt="" class="more-vert text-black cursor-pointer">
         </div>
-        <a href="#" class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#" data-status-id="todo" class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
 
       <!-- Main task -->
@@ -257,7 +257,7 @@
           </div>
           <img data-para-id="doing-para" src="assets/src/images/icons/more vert points.svg" alt="" class="more-vert text-black cursor-pointer">
         </div>
-        <a href="#"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#" data-status-id="doing"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
     </div>
 
@@ -270,7 +270,7 @@
           </div>
           <img data-para-id="review-para" src="assets/src/images/icons/more vert points.svg" alt="" class="more-vert text-black cursor-pointer">
         </div>
-        <a href="#"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#" data-status-id="review"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
     </div>
 
@@ -283,7 +283,7 @@
           </div>
           <img data-para-id="done-para" src="assets/src/images/icons/more vert points.svg" alt="" class="more-vert text-black cursor-pointer">
         </div>
-        <a href="#" class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#" data-status-id="done" class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
 
       <!-- Empty task -->
@@ -413,9 +413,9 @@
         <div class="flex items-center space-x-4">
             <label class="w-24 text-gray-700 font-semibold">Priority :</label>
             <div class="flex flex-1 justify-between">
-              <button type="button" class="bg-red-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-300" id="priority-high">High</button>
-              <button type="button" class="bg-orange-400 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" id="priority-medium">Medium</button>
-              <button type="button" class="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-300" id="priority-low">Low</button>
+              <button data-priority-id="high" type="button" class="bg-red-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-300" id="priority-high">High</button>
+              <button data-priority-id="medium" type="button" class="bg-orange-400 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" id="priority-medium">Medium</button>
+              <button data-priority-id="low" type="button" class="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-300" id="priority-low">Low</button>
             </div>
         </div>
         

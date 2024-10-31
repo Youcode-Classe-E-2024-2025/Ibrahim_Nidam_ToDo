@@ -619,6 +619,10 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .ml-72 {
   margin-left: 18rem;
 }
@@ -1169,6 +1173,10 @@ main {
 
 #kanban{
   background-color:rgba(217, 217, 217,0.19);
+}
+
+.show-form{
+  display: none;
 }
 
 .placeholder\:italic::-moz-placeholder {

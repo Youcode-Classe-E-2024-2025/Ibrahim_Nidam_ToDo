@@ -205,9 +205,10 @@
           </div>
           <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
         </div>
-        <a href="#" id="add-Task"  class="text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#"   class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
 
+      <!-- Main task -->
       <article>
         <div class="max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200" draggable="true">
           <div class="flex justify-between items-start mb-2">
@@ -256,7 +257,7 @@
           </div>
           <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
         </div>
-        <a href="#" id="add-Task" class="text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
     </div>
 
@@ -269,7 +270,7 @@
           </div>
           <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
         </div>
-        <a href="#" id="add-Task" class="text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#"  class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
     </div>
 
@@ -282,9 +283,10 @@
           </div>
           <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
         </div>
-        <a href="#" id="add-Task" class="text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
+        <a href="#" class="add-Task-btn text-white bg-lightModeMain p-2 text-nowrap h-fit rounded text-center">+ Add Task</a>
       </div>
 
+      <!-- Empty task -->
       <article>
         <div class="max-w-sm p-8 bg-white rounded-lg shadow-md border border-gray-200" draggable="true"></div> 
       </article>
@@ -292,9 +294,8 @@
     
   </section>
 
-  <section id="form" class="flex items-center justify-center bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    <!-- Form Container -->
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md md:max-w-lg space-y-6">
+  <section id="form" class=" items-center justify-center bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <form id="task-Form" class="show-form bg-white p-8 rounded-lg shadow-md w-full max-w-md md:max-w-lg space-y-6">
         
         <!-- Title Field -->
         <div class="flex items-center space-x-4">
@@ -312,8 +313,8 @@
         <div class="flex items-center space-x-4">
             <label class="w-24 text-gray-700 font-semibold">Due Date :</label>
             <div class="flex flex-1 space-x-2">
-                <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <select class="w-1/2 px-2 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="date" id="due-date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <select id="due-time-hh" class="w-1/2 px-2 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>HH</option>
                     <!-- Hours options from 00 to 23 -->
                     <option>00</option>
@@ -341,7 +342,7 @@
                     <option>22</option>
                     <option>23</option>
                 </select>
-                <select class="w-1/2 px-2 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="due-time-mm" class="w-1/2 px-2 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>MM</option>
                     <!-- Minutes options from 00 to 59 -->
                     <option>00</option>
@@ -412,18 +413,19 @@
         <div class="flex items-center space-x-4">
             <label class="w-24 text-gray-700 font-semibold">Priority :</label>
             <div class="flex flex-1 justify-between">
-                <button type="button" class="bg-red-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-300">High</button>
-                <button type="button" class="bg-orange-400 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-300">Medium</button>
-                <button type="button" class="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-300">Low</button>
+              <button type="button" class="bg-red-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-300" id="priority-high">High</button>
+              <button type="button" class="bg-orange-400 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" id="priority-medium">Medium</button>
+              <button type="button" class="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-green-300" id="priority-low">Low</button>
             </div>
         </div>
         
         <!-- Submit Button -->
         <div class="flex justify-end mt-6">
-            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">Done</button>
+          <button id="cancel" type="button" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">Cancel</button>
+          <button id="done" type="submit" class="ml-3 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">Done</button>
         </div>
         
-    </div>
+    </form>
 </section>
 
     </main>

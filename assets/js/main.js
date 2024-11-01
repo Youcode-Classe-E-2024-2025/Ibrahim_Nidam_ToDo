@@ -27,7 +27,6 @@ add_Task_btn.forEach((btn) => {
     event.preventDefault();
     status_Id = btn.getAttribute("data-status-id");
     form.classList.remove("show-form");
-    console.log(status_Id);
   });
 });
 
@@ -103,19 +102,18 @@ form.addEventListener("submit", function (event) {
 
   const due_Date_Merged = `${due_date}T${due_hour}:${due_minute}`;
 
-  
-  if(!selected_priority){
+  if (!selected_priority) {
     alert("You should choose a priority.");
     return;
   }
-  if(form_title === ""){
-    alert("The title is necessary.")
-    return
+  if (form_title === "") {
+    alert("The title is necessary.");
+    return;
   }
 
-  if(due_hour === "HH" || due_minute === "MM" || !due_date){
-    alert("Time fields are required.")
-    return
+  if (due_hour === "HH" || due_minute === "MM" || !due_date) {
+    alert("Time fields are required.");
+    return;
   }
   const task_Data = {
     id: task_Id,
@@ -171,30 +169,40 @@ function createCard(task) {
       
       <p class="text-sm text-gray-700 mb-4">${task.description}</p>
 
-      <div class="h-px bg-greyHighLights mb-2"></div>
-      
-      <div class="flex justify-between items-center pt-2">
-          <div class="flex items-center">
-              <div class="flex -space-x-2">
-                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                  <div class="cursor-pointer rounded-full border border-black w-6 h-6 bg-lightModeMain text-white flex items-center justify-center text-xs">+3</div>
-              </div>
-          </div>
-      
-          <div class="flex items-center gap-4 text-gray-300 text-xs">
-              <div class="flex items-center">
-                  <img src="assets/src/images/icons/eye visibility.svg" alt="eye icon" class="w-4 h-4 mr-1" />
-                  <span>2</span>
-              </div>
-              <div class="flex items-center">
-                  <img src="assets/src/images/icons/comment.svg" alt="comment icon" class="w-4 h-4 mr-1" />
-                  <span>0</span>
-              </div>
-          </div>
-      </div>
+    <div class="h-px bg-greyHighLights mb-2"></div>
+    
+    <div class="flex justify-between items-center pt-2">
+        <div class="flex items-center">
+            <div class="flex -space-x-2">
+                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                <div class="cursor-pointer rounded-full border border-black w-6 h-6 bg-lightModeMain text-white flex items-center justify-center text-xs">+3</div>
+            </div>
+        </div>
+    
+        <div class="flex items-center gap-4 text-gray-300 text-xs">
+            <div class="flex items-center">
+                <img src="assets/src/images/icons/eye visibility.svg" alt="eye icon" class="w-4 h-4 mr-1" />
+                <span>2</span>
+            </div>
+            <div class="flex items-center">
+                <img src="assets/src/images/icons/comment.svg" alt="comment icon" class="w-4 h-4 mr-1" />
+                <span>0</span>
+            </div>
+        </div>
+    </div>
   `;
 
-  cards_Place.appendChild(card);
+  console.log(task.status);
+
+  if (task.status === "todo") {
+    toDo_Cards_Place.appendChild(card);
+  } else if (task.status === "doing") {
+    doing_Cards_Place.appendChild(card);
+  } else if (task.status === "review") {
+    review_Cards_Place.appendChild(card);
+  } else {
+    done_Cards_Place.appendChild(card);
+  }
 }

@@ -27,3 +27,7 @@ main {
 .show-form{
     display: none;
 }
+
+.hidden{
+    display: none;
+}

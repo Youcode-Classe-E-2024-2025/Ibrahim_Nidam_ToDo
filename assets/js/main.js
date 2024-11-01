@@ -6,6 +6,8 @@ const form = document.getElementById("task-Form");
 const cancel = document.getElementById("cancel");
 const done = document.getElementById("done");
 
+const cards_Place = document.getElementById("cards-place")
+
 const high_p = document.getElementById("priority-high");
 const medium_p = document.getElementById("priority-medium");
 const low_p = document.getElementById("priority-low");
@@ -109,10 +111,66 @@ form.addEventListener("submit", function (event) {
 
   localStorage.setItem("tasks_added", JSON.stringify(tasks_added));
 
+  createCard(task_Data);
+
   form.reset();
   form.classList.add("show-form");
 
-  console.log("Task saved:", task_Data);
 });
 
 //add task end
+
+// adding task card to the proper status start
+
+function createCard(task) {
+  
+  const card = document.createElement("div");
+  card.className = "max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
+  card.setAttribute("draggable", "true");
+
+  let priorityClass;
+    if (task.priority === "high") {
+        priorityClass = "bg-p1 text-p1Text";
+    } else if (task.priority === "medium") {
+        priorityClass = "bg-p2 text-p2Text"; 
+    } else if (task.priority === "low") {
+        priorityClass = "bg-p3 text-p3Text";
+    }
+
+  card.innerHTML = `
+      <div class="flex justify-between items-start mb-2">
+          <span class=" ${priorityClass} text-sm font-semibold px-2 py-1 rounded-md">${task.title}</span>
+          <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
+      </div>
+      
+      <p class="text-greyText text-xs mb-2">${new Date(task.creationDate).toLocaleDateString()} > ${new Date(task.dueDate).toLocaleDateString()}</p>
+      
+      <p class="text-sm text-gray-700 mb-4">${task.description}</p>
+
+      <div class="h-px bg-greyHighLights mb-2"></div>
+      
+      <div class="flex justify-between items-center pt-2">
+          <div class="flex items-center">
+              <div class="flex -space-x-2">
+                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                  <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                  <div class="cursor-pointer rounded-full border border-black w-6 h-6 bg-lightModeMain text-white flex items-center justify-center text-xs">+3</div>
+              </div>
+          </div>
+      
+          <div class="flex items-center gap-4 text-gray-300 text-xs">
+              <div class="flex items-center">
+                  <img src="assets/src/images/icons/eye visibility.svg" alt="eye icon" class="w-4 h-4 mr-1" />
+                  <span>2</span>
+              </div>
+              <div class="flex items-center">
+                  <img src="assets/src/images/icons/comment.svg" alt="comment icon" class="w-4 h-4 mr-1" />
+                  <span>0</span>
+              </div>
+          </div>
+      </div>
+  `;
+
+  cards_Place.appendChild(card);
+}

@@ -19,9 +19,9 @@ main {
     background: var(--completion-bar);
 }
 
-#kanban{
+/* #kanban{
     background-color:rgba(217, 217, 217,0.19);
-}
+} */
 
 
 .show-form{

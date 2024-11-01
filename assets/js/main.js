@@ -120,6 +120,15 @@ form.addEventListener("submit", function (event) {
     alert("Time fields are required.");
     return;
   }
+
+  console.log(due_Date_Merged)
+  console.log(creation_date)
+
+  if (due_Date_Merged <= creation_date){
+    alert("Due Date can't be the same or smaller than right now")
+    return
+  }
+
   const task_Data = {
     id: task_Id,
     title: form_title,
@@ -258,6 +267,13 @@ function updateStats() {
     doing_stats.innerText = stats_for_Each.doing;
     review_stats.innerText = stats_for_Each.review;
     done_stats.innerText = stats_for_Each.done;
+
+    const total_Tasks = tasks_added.length
+    const completed_Tasks = stats_for_Each.done
+    const completion_Percentage = total_Tasks > 0 ? (completed_Tasks / total_Tasks)*100 : 0
+
+    stats.innerHTML = `${Math.round(completion_Percentage)}% Complete `
+    stats_bar.style.background = `linear-gradient(to right, #6096BA ${completion_Percentage}%, #6096BA ${completion_Percentage}%, rgba(128, 128, 128, 0.29) ${completion_Percentage}% )`
 }
 
 // statistique of tasks end

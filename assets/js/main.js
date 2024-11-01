@@ -16,6 +16,11 @@ const medium_p = document.getElementById("priority-medium");
 const low_p = document.getElementById("priority-low");
 const buttons = document.querySelectorAll("button[data-priority-id]");
 
+const todo_stats = document.getElementById("todo-stats");
+const doing_stats = document.getElementById("doing-stats");
+const review_stats = document.getElementById("review-stats");
+const done_stats = document.getElementById("done-stats");
+
 const more_vert = document.querySelectorAll(".more-vert");
 
 let selected_priority = null;
@@ -133,6 +138,8 @@ form.addEventListener("submit", function (event) {
 
   createCard(task_Data);
 
+  updateStats();
+
   form.reset();
   form.classList.add("show-form");
 });
@@ -203,22 +210,54 @@ function createCard(task) {
   } else {
     done_Cards_Place.appendChild(card);
   }
-}
 
+}
 
 // adding task card to the proper status end
 
-
 // loading the data from local storge start
 
-document.addEventListener("DOMContentLoaded", function(){
-    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || []
+document.addEventListener("DOMContentLoaded", function () {
+  const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
 
-    if(tasks_added.length > 0){
-        tasks_added.forEach(task => {
-            createCard(task);
-        })
-    }
-})
+  if (tasks_added.length > 0) {
+    tasks_added.forEach((task) => {
+      createCard(task);
+    });
+  }
+  updateStats();
+});
 
 // loading the data from local storge end
+
+// statistique of tasks start
+
+const stats_for_Each = {
+  todo: 0,
+  doing: 0,
+  review: 0,
+  done: 0,
+};
+
+function updateStats() {
+
+  stats_for_Each.todo = 0;
+  stats_for_Each.doing = 0;
+  stats_for_Each.review = 0;
+  stats_for_Each.done = 0;
+
+    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+
+    const original_Text_stat = 0;
+
+    tasks_added.forEach((task) => {
+      stats_for_Each[task.status] = (stats_for_Each[task.status] || original_Text_stat) + 1;
+    });
+
+    todo_stats.innerText = stats_for_Each.todo;
+    doing_stats.innerText = stats_for_Each.doing;
+    review_stats.innerText = stats_for_Each.review;
+    done_stats.innerText = stats_for_Each.done;
+}
+
+// statistique of tasks end

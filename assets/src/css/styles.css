@@ -30,4 +30,5 @@ main {
 
 .hidden{
     display: none;
+    background-color: rgba(0, 42, 2,0.63);
 }

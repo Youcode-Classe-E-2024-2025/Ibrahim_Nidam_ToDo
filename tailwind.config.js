@@ -2,17 +2,17 @@
 module.exports = {
   content: [
     "./*.html", // Main HTML file in the project root
-    // "./assets/js/**/*.{js}", // All JavaScript files inside assets/js folder
+    "./assets/js/**/*.js", // All JavaScript files inside assets/js folder
   ],
   theme: {
     extend: {
       colors: {
-        p1: "#DE3232",
+        p1: "rgba(231, 0, 0,0.63)",
         p1Text: "#630000",
-        p2: "#3F1D00",
-        p2Text: "#FF7700",
-        p3: "#02B20B",
-        p3Text: "#002A02",
+        p2: "rgba(255, 119, 0,0.63)",
+        p2Text: "rgba(63, 29, 0,0.63)",
+        p3: "rgba(2, 178, 11,0.63)",
+        p3Text: "rgba(0, 42, 2,0.63)",
         bgKanban: "#D9D9D9",
         lightModeMain: "#6096BA",
         darkModeMain: "##274C77",

@@ -167,7 +167,7 @@ function createCard(task) {
         task.creationDate
       ).toLocaleDateString()} > ${new Date(task.dueDate).toLocaleDateString()}</p>
       
-      <p class="text-sm text-gray-700 mb-4">${task.description}</p>
+      <p class="text-sm text-ellipsis overflow-hidden text-gray-700 mb-4 ">${task.description}</p>
 
     <div class="h-px bg-greyHighLights mb-2"></div>
     
@@ -194,8 +194,6 @@ function createCard(task) {
     </div>
   `;
 
-  console.log(task.status);
-
   if (task.status === "todo") {
     toDo_Cards_Place.appendChild(card);
   } else if (task.status === "doing") {
@@ -206,3 +204,21 @@ function createCard(task) {
     done_Cards_Place.appendChild(card);
   }
 }
+
+
+// adding task card to the proper status end
+
+
+// loading the data from local storge start
+
+document.addEventListener("DOMContentLoaded", function(){
+    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || []
+
+    if(tasks_added.length > 0){
+        tasks_added.forEach(task => {
+            createCard(task);
+        })
+    }
+})
+
+// loading the data from local storge end

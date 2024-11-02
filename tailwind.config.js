@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html", // Main HTML file in the project root
-    "./assets/js/**/*.js", // All JavaScript files inside assets/js folder
+    "./*.html",
+    "./assets/js/**/*.js", 
   ],
   theme: {
     extend: {
@@ -21,6 +21,9 @@ module.exports = {
         tirer:"#817C7C",
         hightLightWithContrast:"rgba(128, 128, 128,0.29)",
         
+      },
+      screens:{
+        "bt-sm" : "820px",
       },
     },
   },

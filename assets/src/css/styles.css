@@ -37,9 +37,9 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    backdrop-filter: blur(5px); /* Blur effect for the background */
-    z-index: 99; /* Behind the card but above other content */
-    display: none; /* Hidden by default */
+    backdrop-filter: blur(5px); 
+    z-index: 99; 
+    display: none; 
 }
 
 .card-active {
@@ -61,6 +61,11 @@ main {
         box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
     100% {
-        box-shadow: 0 0 30px rgba(255, 215, 0, 1); /* More intense shine */
+        box-shadow: 0 0 30px rgba(255, 215, 0, 1); 
     }
 }
+
+.trash-icon:hover {
+    transform: scale(1.05);
+}
+

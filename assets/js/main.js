@@ -157,7 +157,7 @@ form.addEventListener("submit", function (event) {
 
 function createCard(task) {
   const card = document.createElement("div");
-  card.className = "dragNdrop max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
+  card.className = "dragNdrop cursor-pointer max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
   card.setAttribute("draggable", "true");
   card.id = task.id;
 
@@ -175,7 +175,7 @@ function createCard(task) {
           <span class=" ${priority_Class_color} text-sm font-semibold px-2 py-1 rounded-md">${
     task.title
   }</span>
-          <img src="assets/src/images/icons/trash.svg" alt="" class="trash-icon text-black cursor-pointer hover:bg-red-500">
+          <img src="assets/src/images/icons/trash.svg" alt="" class="trash-icon text-black cursor-pointer">
       </div>
       
       <p class="text-greyText text-xs mb-2">${new Date(
@@ -406,3 +406,7 @@ function renderTasks() {
   }
 
 // delete task card end
+
+
+
+

@@ -213,12 +213,16 @@ function createCard(task) {
     e.dataTransfer.setData("text/plain", card.id);
   });
 
-  card.addEventListener("click", function(e) {
+  card.addEventListener("click", function (e) {
     e.stopPropagation();
     scaleCard(card);
-});
+  });
 
-
+  const trash_Icon = card.querySelector(".trash-icon");
+  trash_Icon.addEventListener("click", function (e) {
+    e.stopPropagation();
+    removeTask(task.id); // Call the removeTask function when clicked
+  });
 
   if (task.status === "todo") {
     toDo_Cards_Place.appendChild(card);
@@ -239,7 +243,7 @@ function createCard(task) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
-  const trashIcon = document.getElementById('trash');
+  const trashIcon = document.getElementById("trash");
   if (tasks_added.length > 0) {
     tasks_added.forEach((task) => {
       createCard(task);
@@ -322,7 +326,7 @@ function placeHolderCard() {
   drop_Zones.forEach((zone) => {
     const place_Holder = zone.querySelectorAll(".place-holder");
     const has_Tasks = zone.querySelectorAll(".dragNdrop").length > 0;
-
+    
     place_Holder.forEach((ph) => {
       ph.style.display = has_Tasks ? "none" : "block";
     });
@@ -330,32 +334,75 @@ function placeHolderCard() {
 }
 // card placeholder end
 
-
 // reveal cards content start
 
 let blur_Overlay;
 
 function scaleCard(card) {
-    if (!blur_Overlay) {
-        blur_Overlay = document.createElement('div');
-        blur_Overlay.className = 'blur-overlay';
-        document.body.appendChild(blur_Overlay);
+  if (!blur_Overlay) {
+    blur_Overlay = document.createElement("div");
+    blur_Overlay.className = "blur-overlay";
+    document.body.appendChild(blur_Overlay);
 
-        blur_Overlay.style.display = 'block';
+    blur_Overlay.style.display = "block";
 
-        blur_Overlay.addEventListener('click', function() {
-            card.classList.remove('card-active');
-            blur_Overlay.style.display = 'none';
-            document.body.removeChild(blur_Overlay);
-            blur_Overlay = null;
-        });
-    }
+    blur_Overlay.addEventListener("click", function () {
+      card.classList.remove("card-active");
+      blur_Overlay.style.display = "none";
+      document.body.removeChild(blur_Overlay);
+      blur_Overlay = null;
+    });
+  }
 
-    card.classList.add('card-active');
+  card.classList.add("card-active");
 }
 
 // reveal cards content end
 
-trashIcon.addEventListener("click",function(){
-    console.log("zdze")
-})
+// delete task card start
+
+function removeTask(task_id) {
+  const card = document.getElementById(task_id);
+  if (card) {
+      console.log(`Task card removed: ${task_id}`);
+    card.remove();
+  }
+
+  const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+
+  const updated_tasks = tasks_added.filter((task) => task.id !== task_id);
+
+  localStorage.setItem("tasks_added", JSON.stringify(updated_tasks));
+
+  renderTasks();
+  updateStats();
+  placeHolderCard();
+}
+
+function renderTasks() {
+
+    const todo_place_holder = toDo_Cards_Place.querySelector(".place-holder");
+    const doing_place_holder = doing_Cards_Place.querySelector(".place-holder");
+    const review_place_holder = review_Cards_Place.querySelector(".place-holder");
+    const done_place_holder = done_Cards_Place.querySelector(".place-holder");
+  
+    toDo_Cards_Place.innerHTML = "";
+    doing_Cards_Place.innerHTML = "";
+    review_Cards_Place.innerHTML = "";
+    done_Cards_Place.innerHTML = "";
+    
+    if (todo_place_holder) toDo_Cards_Place.appendChild(todo_place_holder);
+    if (doing_place_holder) doing_Cards_Place.appendChild(doing_place_holder);
+    if (review_place_holder) review_Cards_Place.appendChild(review_place_holder);
+    if (done_place_holder) done_Cards_Place.appendChild(done_place_holder);
+   
+    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+   
+    tasks_added.forEach((task) => {
+      createCard(task);
+    });
+  
+   
+  }
+
+// delete task card end

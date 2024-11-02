@@ -121,14 +121,12 @@ form.addEventListener("submit", function (event) {
     return;
   }
 
-  console.log(due_Date_Merged)
-  console.log(creation_date)
-
-  if (due_Date_Merged <= creation_date){
-    alert("Due Date can't be the same or smaller than right now")
-    return
+  if (due_Date_Merged <= creation_date) {
+    alert("Due Date can't be the same or smaller than right now");
+    return;
   }
 
+  console.log(due_Date_Merged - creation_date);
   const task_Data = {
     id: task_Id,
     title: form_title,
@@ -159,8 +157,9 @@ form.addEventListener("submit", function (event) {
 
 function createCard(task) {
   const card = document.createElement("div");
-  card.className = "max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
+  card.className = "dragNdrop max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
   card.setAttribute("draggable", "true");
+  card.id = task.id;
 
   let priority_Class_color;
   if (task.priority === "high") {
@@ -210,6 +209,10 @@ function createCard(task) {
     </div>
   `;
 
+  card.addEventListener("dragstart", function (e) {
+    e.dataTransfer.setData("text/plain", card.id);
+  });
+
   if (task.status === "todo") {
     toDo_Cards_Place.appendChild(card);
   } else if (task.status === "doing") {
@@ -219,7 +222,6 @@ function createCard(task) {
   } else {
     done_Cards_Place.appendChild(card);
   }
-
 }
 
 // adding task card to the proper status end
@@ -234,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
       createCard(task);
     });
   }
+
   updateStats();
 });
 
@@ -249,31 +252,55 @@ const stats_for_Each = {
 };
 
 function updateStats() {
-
   stats_for_Each.todo = 0;
   stats_for_Each.doing = 0;
   stats_for_Each.review = 0;
   stats_for_Each.done = 0;
 
-    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+  const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
 
-    const original_Text_stat = 0;
+  const original_Text_stat = 0;
 
-    tasks_added.forEach((task) => {
-      stats_for_Each[task.status] = (stats_for_Each[task.status] || original_Text_stat) + 1;
-    });
+  tasks_added.forEach((task) => {
+    stats_for_Each[task.status] = (stats_for_Each[task.status] || original_Text_stat) + 1;
+  });
 
-    todo_stats.innerText = stats_for_Each.todo;
-    doing_stats.innerText = stats_for_Each.doing;
-    review_stats.innerText = stats_for_Each.review;
-    done_stats.innerText = stats_for_Each.done;
+  todo_stats.innerText = stats_for_Each.todo;
+  doing_stats.innerText = stats_for_Each.doing;
+  review_stats.innerText = stats_for_Each.review;
+  done_stats.innerText = stats_for_Each.done;
 
-    const total_Tasks = tasks_added.length
-    const completed_Tasks = stats_for_Each.done
-    const completion_Percentage = total_Tasks > 0 ? (completed_Tasks / total_Tasks)*100 : 0
+  const total_Tasks = tasks_added.length;
+  const completed_Tasks = stats_for_Each.done;
+  const completion_Percentage = total_Tasks > 0 ? (completed_Tasks / total_Tasks) * 100 : 0;
 
-    stats.innerHTML = `${Math.round(completion_Percentage)}% Complete `
-    stats_bar.style.background = `linear-gradient(to right, #6096BA ${completion_Percentage}%, #6096BA ${completion_Percentage}%, rgba(128, 128, 128, 0.29) ${completion_Percentage}% )`
+  stats.innerHTML = `${Math.round(completion_Percentage)}% Complete `;
+  stats_bar.style.background = `linear-gradient(to right, #6096BA ${completion_Percentage}%, #6096BA ${completion_Percentage}%, rgba(128, 128, 128, 0.29) ${completion_Percentage}% )`;
 }
 
 // statistique of tasks end
+
+//update the status using drag and drop start
+
+const drop_Zones = [toDo_Cards_Place, doing_Cards_Place, review_Cards_Place, done_Cards_Place];
+
+drop_Zones.forEach((zone) => {
+  zone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  zone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const task_Id_Drag_N_Drop = e.dataTransfer.getData("text/plain");
+    const task = document.getElementById(task_Id_Drag_N_Drop);
+    zone.appendChild(task);
+
+    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+    const task_Data = tasks_added.find((t) => t.id === task_Id_Drag_N_Drop);
+    task_Data.status = zone.id.replace("-card-article", "");
+    localStorage.setItem("tasks_added", JSON.stringify(tasks_added));
+
+    updateStats();
+  });
+});
+//update the status using drag and drop end

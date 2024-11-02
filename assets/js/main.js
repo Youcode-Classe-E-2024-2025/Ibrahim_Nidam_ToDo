@@ -175,7 +175,7 @@ function createCard(task) {
           <span class=" ${priority_Class_color} text-sm font-semibold px-2 py-1 rounded-md">${
     task.title
   }</span>
-          <img src="assets/src/images/icons/more vert points.svg" alt="" class="text-black cursor-pointer">
+          <img src="assets/src/images/icons/trash.svg" alt="" class="trash-icon text-black cursor-pointer hover:bg-red-500">
       </div>
       
       <p class="text-greyText text-xs mb-2">${new Date(
@@ -213,6 +213,13 @@ function createCard(task) {
     e.dataTransfer.setData("text/plain", card.id);
   });
 
+  card.addEventListener("click", function(e) {
+    e.stopPropagation();
+    scaleCard(card);
+});
+
+
+
   if (task.status === "todo") {
     toDo_Cards_Place.appendChild(card);
   } else if (task.status === "doing") {
@@ -232,7 +239,7 @@ function createCard(task) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
-
+  const trashIcon = document.getElementById('trash');
   if (tasks_added.length > 0) {
     tasks_added.forEach((task) => {
       createCard(task);
@@ -322,3 +329,33 @@ function placeHolderCard() {
   });
 }
 // card placeholder end
+
+
+// reveal cards content start
+
+let blur_Overlay;
+
+function scaleCard(card) {
+    if (!blur_Overlay) {
+        blur_Overlay = document.createElement('div');
+        blur_Overlay.className = 'blur-overlay';
+        document.body.appendChild(blur_Overlay);
+
+        blur_Overlay.style.display = 'block';
+
+        blur_Overlay.addEventListener('click', function() {
+            card.classList.remove('card-active');
+            blur_Overlay.style.display = 'none';
+            document.body.removeChild(blur_Overlay);
+            blur_Overlay = null;
+        });
+    }
+
+    card.classList.add('card-active');
+}
+
+// reveal cards content end
+
+trashIcon.addEventListener("click",function(){
+    console.log("zdze")
+})

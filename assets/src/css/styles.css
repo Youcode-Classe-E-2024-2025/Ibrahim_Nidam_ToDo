@@ -12,7 +12,7 @@
 
 
 main {
-    margin-left: -1px; /* Adjust as necessary */
+    margin-left: -1px;
 }
 
 .completetion-bar{
@@ -28,8 +28,23 @@ main {
     background-color: rgba(0, 42, 2,0.63);
 }
 
+.trash-icon:hover {
+    transform: scale(1.05);
+}
 
-/* Add these styles to your CSS */
+.dragNdrop {
+    position: relative;
+}
+
+.time-remaining {
+    font-size: 12px;
+    margin-bottom: 8px;
+    display: none;
+}
+
+.dragNdrop:hover .time-remaining {
+    display: block;
+}
 
 .blur-overlay {
     position: fixed;
@@ -37,16 +52,16 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    backdrop-filter: blur(5px); 
-    z-index: 99; 
-    display: none; 
+    backdrop-filter: blur(5px);
+    z-index: 99;
+    display: none;
 }
 
 .card-active {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     z-index: 100;
     width: 80vw;
     height: auto;
@@ -61,11 +76,6 @@ main {
         box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
     100% {
-        box-shadow: 0 0 30px rgba(255, 215, 0, 1); 
+        box-shadow: 0 0 30px rgba(255, 215, 0, 1);
     }
 }
-
-.trash-icon:hover {
-    transform: scale(1.05);
-}
-

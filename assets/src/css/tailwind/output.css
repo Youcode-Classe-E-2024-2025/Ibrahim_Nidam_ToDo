@@ -969,11 +969,6 @@ video {
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
 
-.bg-greyHighLights {
-  --tw-bg-opacity: 1;
-  background-color: rgb(128 128 128 / var(--tw-bg-opacity));
-}
-
 .bg-lightModeMain {
   --tw-bg-opacity: 1;
   background-color: rgb(96 150 186 / var(--tw-bg-opacity));
@@ -1214,7 +1209,6 @@ video {
 
 main {
   margin-left: -1px;
-  /* Adjust as necessary */
 }
 
 .completetion-bar{
@@ -1230,7 +1224,23 @@ main {
   background-color: rgba(0, 42, 2,0.63);
 }
 
-/* Add these styles to your CSS */
+.trash-icon:hover {
+  transform: scale(1.05);
+}
+
+.dragNdrop {
+  position: relative;
+}
+
+.time-remaining {
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: none;
+}
+
+.dragNdrop:hover .time-remaining {
+  display: block;
+}
 
 .blur-overlay {
   position: fixed;
@@ -1245,10 +1255,10 @@ main {
 }
 
 .card-active {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   z-index: 100;
   width: 80vw;
   height: auto;
@@ -1266,10 +1276,6 @@ main {
   100% {
     box-shadow: 0 0 30px rgba(255, 215, 0, 1);
   }
-}
-
-.trash-icon:hover {
-  transform: scale(1.05);
 }
 
 .placeholder\:italic::-moz-placeholder {
@@ -1422,4 +1428,3 @@ main {
     width: 18rem;
   }
 }
-

@@ -26,6 +26,7 @@ const more_vert = document.querySelectorAll(".more-vert");
 let selected_priority = null;
 let status_Id = null;
 
+
 //Form Toggle start
 add_Task_btn.forEach((btn) => {
   btn.addEventListener("click", function (event) {
@@ -39,6 +40,7 @@ cancel.addEventListener("click", function () {
   form.classList.add("show-form");
 });
 //Form Toggle end
+
 
 // change name of columns start
 
@@ -73,6 +75,7 @@ more_vert.forEach((btn) => {
 });
 
 // change name of columns end
+
 
 // add task start
 
@@ -153,61 +156,81 @@ form.addEventListener("submit", function (event) {
 
 //add task end
 
+
 // adding task card to the proper status start
 
 function createCard(task) {
   const card = document.createElement("div");
-  card.className = "dragNdrop cursor-pointer max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
+  card.className ="dragNdrop cursor-pointer max-w-sm p-4 bg-white rounded-lg shadow-md border border-gray-200";
   card.setAttribute("draggable", "true");
   card.id = task.id;
 
-  let priority_Class_color;
+  const now = new Date();
+  const dueDate = new Date(task.dueDate);
+  const timeRemaining = dueDate - now;
+
+  const daysRemaining = Math.max(0, Math.floor(timeRemaining / (1000 * 60 * 60 * 24)));
+  const hoursRemaining = Math.max(
+    0,
+    Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  );
+  const minutesRemaining = Math.max(
+    0,
+    Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))
+  );
+
+  let priority_Class_color, text_color, divider_color;
   if (task.priority === "high") {
     priority_Class_color = "bg-p1 text-p1Text";
+    text_color = "#dc2626";
+    divider_color = "#dc2626";
   } else if (task.priority === "medium") {
     priority_Class_color = "bg-p2 text-p2Text";
+    text_color = "#d97706";
+    divider_color = "#d97706";
   } else if (task.priority === "low") {
     priority_Class_color = "bg-p3 text-p3Text";
+    text_color = "#059669";
+    divider_color = "#059669";
   }
 
   card.innerHTML = `
-      <div class="flex justify-between items-start mb-2">
-          <span class=" ${priority_Class_color} text-sm font-semibold px-2 py-1 rounded-md">${
+        <div class="flex justify-between items-start mb-2">
+            <span class="${priority_Class_color} text-sm font-semibold px-2 py-1 rounded-md">${
     task.title
   }</span>
-          <img src="assets/src/images/icons/trash.svg" alt="" class="trash-icon text-black cursor-pointer">
-      </div>
-      
-      <p class="text-greyText text-xs mb-2">${new Date(
-        task.creationDate
-      ).toLocaleDateString()} > ${new Date(task.dueDate).toLocaleDateString()}</p>
-      
-      <p class="text-sm text-ellipsis overflow-hidden text-gray-700 mb-4 ">${task.description}</p>
+            <img src="assets/src/images/icons/trash.svg" alt="" class="trash-icon text-black cursor-pointer">
+        </div>
+        
+        <p class="text-greyText text-xs mb-2">${new Date(task.creationDate).toLocaleDateString()} > ${new Date(task.dueDate).toLocaleDateString()}</p>
+        
+        <p class="text-sm text-ellipsis overflow-hidden text-gray-700 mb-4">${task.description}</p>
 
-    <div class="h-px bg-greyHighLights mb-2"></div>
-    
-    <div class="flex justify-between items-center pt-2">
-        <div class="flex items-center">
-            <div class="flex -space-x-2">
-                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
-                <div class="cursor-pointer rounded-full border border-black w-6 h-6 bg-lightModeMain text-white flex items-center justify-center text-xs">+3</div>
+        <div class="time-remaining" style="color: ${text_color}">Left ${daysRemaining}d ${hoursRemaining}h ${minutesRemaining}m</div>
+        <div class="h-px mb-2" style="background-color: ${divider_color}"></div>
+        
+        <div class="flex justify-between items-center pt-2">
+            <div class="flex items-center">
+                <div class="flex -space-x-2">
+                    <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                    <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                    <img src="https://picsum.photos/100" alt="" class="w-6 h-6 rounded-full border border-black">
+                    <div class="cursor-pointer rounded-full border border-black w-6 h-6 bg-lightModeMain text-white flex items-center justify-center text-xs">+3</div>
+                </div>
+            </div>
+        
+            <div class="flex items-center gap-4 text-gray-300 text-xs">
+                <div class="flex items-center">
+                    <img src="assets/src/images/icons/eye visibility.svg" alt="eye icon" class="w-4 h-4 mr-1" />
+                    <span>2</span>
+                </div>
+                <div class="flex items-center">
+                    <img src="assets/src/images/icons/comment.svg" alt="comment icon" class="w-4 h-4 mr-1" />
+                    <span>0</span>
+                </div>
             </div>
         </div>
-    
-        <div class="flex items-center gap-4 text-gray-300 text-xs">
-            <div class="flex items-center">
-                <img src="assets/src/images/icons/eye visibility.svg" alt="eye icon" class="w-4 h-4 mr-1" />
-                <span>2</span>
-            </div>
-            <div class="flex items-center">
-                <img src="assets/src/images/icons/comment.svg" alt="comment icon" class="w-4 h-4 mr-1" />
-                <span>0</span>
-            </div>
-        </div>
-    </div>
-  `;
+    `;
 
   card.addEventListener("dragstart", function (e) {
     e.dataTransfer.setData("text/plain", card.id);
@@ -221,8 +244,30 @@ function createCard(task) {
   const trash_Icon = card.querySelector(".trash-icon");
   trash_Icon.addEventListener("click", function (e) {
     e.stopPropagation();
-    removeTask(task.id); // Call the removeTask function when clicked
+    removeTask(task.id);
   });
+
+  const updateTimeRemaining = () => {
+    const now = new Date();
+    const timeRemaining = dueDate - now;
+
+    const daysRemaining = Math.max(0, Math.floor(timeRemaining / (1000 * 60 * 60 * 24)));
+    const hoursRemaining = Math.max(
+      0,
+      Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    );
+    const minutesRemaining = Math.max(
+      0,
+      Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))
+    );
+
+    const timeRemainingElement = card.querySelector(".time-remaining");
+    if (timeRemainingElement) {
+      timeRemainingElement.textContent = `Left ${daysRemaining}d ${hoursRemaining}h ${minutesRemaining}m`;
+    }
+  };
+
+  setInterval(updateTimeRemaining, 60000);
 
   if (task.status === "todo") {
     toDo_Cards_Place.appendChild(card);
@@ -238,6 +283,7 @@ function createCard(task) {
 }
 
 // adding task card to the proper status end
+
 
 // loading the data from local storge start
 
@@ -255,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // loading the data from local storge end
+
 
 // statistique of tasks start
 
@@ -294,6 +341,7 @@ function updateStats() {
 
 // statistique of tasks end
 
+
 //update the status using drag and drop start
 
 const drop_Zones = [toDo_Cards_Place, doing_Cards_Place, review_Cards_Place, done_Cards_Place];
@@ -320,19 +368,21 @@ drop_Zones.forEach((zone) => {
 });
 //update the status using drag and drop end
 
+
 // card placeholder start
 
 function placeHolderCard() {
   drop_Zones.forEach((zone) => {
     const place_Holder = zone.querySelectorAll(".place-holder");
     const has_Tasks = zone.querySelectorAll(".dragNdrop").length > 0;
-    
+
     place_Holder.forEach((ph) => {
       ph.style.display = has_Tasks ? "none" : "block";
     });
   });
 }
 // card placeholder end
+
 
 // reveal cards content start
 
@@ -359,12 +409,13 @@ function scaleCard(card) {
 
 // reveal cards content end
 
+
 // delete task card start
 
 function removeTask(task_id) {
   const card = document.getElementById(task_id);
   if (card) {
-      console.log(`Task card removed: ${task_id}`);
+    console.log(`Task card removed: ${task_id}`);
     card.remove();
   }
 
@@ -380,33 +431,26 @@ function removeTask(task_id) {
 }
 
 function renderTasks() {
+  const todo_place_holder = toDo_Cards_Place.querySelector(".place-holder");
+  const doing_place_holder = doing_Cards_Place.querySelector(".place-holder");
+  const review_place_holder = review_Cards_Place.querySelector(".place-holder");
+  const done_place_holder = done_Cards_Place.querySelector(".place-holder");
 
-    const todo_place_holder = toDo_Cards_Place.querySelector(".place-holder");
-    const doing_place_holder = doing_Cards_Place.querySelector(".place-holder");
-    const review_place_holder = review_Cards_Place.querySelector(".place-holder");
-    const done_place_holder = done_Cards_Place.querySelector(".place-holder");
-  
-    toDo_Cards_Place.innerHTML = "";
-    doing_Cards_Place.innerHTML = "";
-    review_Cards_Place.innerHTML = "";
-    done_Cards_Place.innerHTML = "";
-    
-    if (todo_place_holder) toDo_Cards_Place.appendChild(todo_place_holder);
-    if (doing_place_holder) doing_Cards_Place.appendChild(doing_place_holder);
-    if (review_place_holder) review_Cards_Place.appendChild(review_place_holder);
-    if (done_place_holder) done_Cards_Place.appendChild(done_place_holder);
-   
-    const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
-   
-    tasks_added.forEach((task) => {
-      createCard(task);
-    });
-  
-   
-  }
+  toDo_Cards_Place.innerHTML = "";
+  doing_Cards_Place.innerHTML = "";
+  review_Cards_Place.innerHTML = "";
+  done_Cards_Place.innerHTML = "";
+
+  if (todo_place_holder) toDo_Cards_Place.appendChild(todo_place_holder);
+  if (doing_place_holder) doing_Cards_Place.appendChild(doing_place_holder);
+  if (review_place_holder) review_Cards_Place.appendChild(review_place_holder);
+  if (done_place_holder) done_Cards_Place.appendChild(done_place_holder);
+
+  const tasks_added = JSON.parse(localStorage.getItem("tasks_added")) || [];
+
+  tasks_added.forEach((task) => {
+    createCard(task);
+  });
+}
 
 // delete task card end
-
-
-
-

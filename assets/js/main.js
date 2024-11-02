@@ -222,6 +222,8 @@ function createCard(task) {
   } else {
     done_Cards_Place.appendChild(card);
   }
+
+  placeHolderCard();
 }
 
 // adding task card to the proper status end
@@ -238,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   updateStats();
+  placeHolderCard();
 });
 
 // loading the data from local storge end
@@ -301,6 +304,21 @@ drop_Zones.forEach((zone) => {
     localStorage.setItem("tasks_added", JSON.stringify(tasks_added));
 
     updateStats();
+    placeHolderCard();
   });
 });
 //update the status using drag and drop end
+
+// card placeholder start
+
+function placeHolderCard() {
+  drop_Zones.forEach((zone) => {
+    const place_Holder = zone.querySelectorAll(".place-holder");
+    const has_Tasks = zone.querySelectorAll(".dragNdrop").length > 0;
+
+    place_Holder.forEach((ph) => {
+      ph.style.display = has_Tasks ? "none" : "block";
+    });
+  });
+}
+// card placeholder end
